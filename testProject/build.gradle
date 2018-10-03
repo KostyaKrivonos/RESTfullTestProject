@@ -23,11 +23,13 @@ repositories {
 	mavenCentral()
 }
 
-
+dependencies {
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+}
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
-	implementation('org.springframework.boot:spring-boot-starter-data-rest')
+	implementation('org.springframework.boot:spring-boot-starter-web')
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	testImplementation('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 }
