@@ -3,9 +3,10 @@ package com.example.personProject.controllers;
 import com.example.personProject.dto.ValidationErrorBuilder;
 import com.example.personProject.models.Person;
 import com.example.personProject.services.PersonService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -22,7 +23,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
+    private static final Logger LOGGER = LogManager.getLogger(PersonController.class);
 
    /* @RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public List<Person> findByName(@PathVariable("name") String name) {
