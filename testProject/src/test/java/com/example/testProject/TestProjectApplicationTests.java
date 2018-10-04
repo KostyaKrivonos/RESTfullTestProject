@@ -1,4 +1,4 @@
-package com.example.testProject;
+/*package com.example.testProject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,4 +13,4 @@ public class TestProjectApplicationTests {
 	public void contextLoads() {
 	}
 
-}
+}*/

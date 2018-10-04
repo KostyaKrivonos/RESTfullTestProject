@@ -17,9 +17,13 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    public List<Person> findByName(@PathVariable("name") String name) {
+        return personService.findByName(name);
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public Person addPerson(@Valid @RequestBody Person person) {
-
         personService.addPerson(person);
         return person;
     }
