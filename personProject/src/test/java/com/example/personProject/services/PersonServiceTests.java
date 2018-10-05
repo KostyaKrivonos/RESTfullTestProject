@@ -1,8 +1,7 @@
 package com.example.personProject.services;
 
-import com.example.personProject.controllers.PersonController;
 import com.example.personProject.models.Person;
-import com.example.personProject.repository.PersonRepository;
+import com.example.personProject.repositorys.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,8 +33,8 @@ public class PersonServiceTests {
     @Test
     public void testFindOneByQuery(){
         Person nikolas = new Person("Nikolas", "+380974585321");
-        when(personRepository.findOneByQuery("Nikolas", "+380974585321")).thenReturn(nikolas);
-        Person testPerson = personService.findOneByQuery("Nikolas", "+380974585321");
+        when(personRepository.findOne("Nikolas", "+380974585321")).thenReturn(nikolas);
+        Person testPerson = personService.findOne("Nikolas", "+380974585321");
         assertEquals(nikolas.getName(), testPerson.getName());
         assertEquals(nikolas.getPhone(), testPerson.getPhone());
     }
@@ -46,7 +44,7 @@ public class PersonServiceTests {
         Person nikolas = new Person("Nikolas", "+380974585321");
         Person alex = new Person("Alex", "+380974878963");
         when(personRepository.findAll()).thenReturn(Arrays.asList(nikolas, alex));
-        List<Person> personList = personService.showAllPersons();
+        List<Person> personList = personService.findAll();
     }
 
 

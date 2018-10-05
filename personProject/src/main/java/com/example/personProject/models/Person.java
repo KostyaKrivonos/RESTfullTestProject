@@ -11,12 +11,13 @@ import javax.validation.constraints.Size;
 public class Person {
     @Id
     private ObjectId id;
-    @NotNull(message = "enter a valid name")
+
+    @NotNull
     @Size(min=2, max=15, message = "name length 2-15")
     private String name;
-    @NotNull(message = "enter a valid phone")
-    @Size(min=10, max=13, message = "phone length 10-13")
-    //@Pattern(regexp = "[0-9]{10,13}",message="only numbers")
+
+    @NotNull
+    @Size(min=10, max=13, message = "phone numbers length 10-13")
     private String phone;
 
     public Person() {

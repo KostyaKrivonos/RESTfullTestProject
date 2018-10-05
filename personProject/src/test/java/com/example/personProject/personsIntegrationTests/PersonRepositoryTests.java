@@ -1,15 +1,13 @@
 package com.example.personProject.personsIntegrationTests;
 
 import com.example.personProject.models.Person;
-import com.example.personProject.repository.PersonRepository;
+import com.example.personProject.repositorys.PersonRepository;
 import com.example.personProject.services.PersonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,7 +25,7 @@ public class PersonRepositoryTests {
         personRepository.save(alex);
 
         // when
-        Person found = personRepository.findOneByQuery(alex.getName(), alex.getPhone());
+        Person found = personRepository.findOne(alex.getName(), alex.getPhone());
 
         // then
         if(found.getName().equalsIgnoreCase(alex.getName()) & found.getPhone().equalsIgnoreCase(alex.getPhone())){

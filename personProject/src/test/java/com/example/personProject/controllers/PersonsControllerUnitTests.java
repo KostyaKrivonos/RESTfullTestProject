@@ -1,7 +1,6 @@
 package com.example.personProject.controllers;
 
 import com.example.personProject.models.Person;
-import com.example.personProject.personsIntegrationTests.PersonRepositoryTests;
 import com.example.personProject.services.PersonService;
 import org.bson.types.ObjectId;
 import org.junit.Before;
@@ -11,9 +10,9 @@ import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -49,7 +48,7 @@ public class PersonsControllerUnitTests {
     public void testFindOneByQuery() throws Exception {
         String jsonPerson = String.format("{\"name\": \"name\",\"phone\": \"phone\"}");
         Person nikolas = new Person("Nikolas", "+380974585321");
-        when(personService.findOneByQuery("Nikolas", "+380974585321")).thenReturn(nikolas);
+        when(personService.findOne("Nikolas", "+380974585321")).thenReturn(nikolas);
 
         mockMvc.perform(get("/findOne/name/phone")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -64,9 +63,9 @@ public class PersonsControllerUnitTests {
         Person nikolas = new Person("Nikolas", "+380974585321");
         Person alex = new Person("Alex", "+380974878963");
 
-        when(personService.showAllPersons()).thenReturn(Arrays.asList(nikolas, alex));
+        when(personService.findAll()).thenReturn(Arrays.asList(nikolas, alex));
 
-        mockMvc.perform(get("/persons/showAll"))
+        mockMvc.perform(get("/persons/findAll"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -75,7 +74,7 @@ public class PersonsControllerUnitTests {
                 .andExpect(jsonPath("$[1].name", is("Alex")))
                 .andExpect(jsonPath("$[1].phone", is("+380974878963")));
 
-        verify(personService, times(1)).showAllPersons();
+        verify(personService, times(1)).findAll();
         verifyNoMoreInteractions(personService);
     }
 
@@ -86,9 +85,9 @@ public class PersonsControllerUnitTests {
         nikolas.setName("Nikolas");
         nikolas.setPhone("+380954789635");
 
-        when(personService.findPersonById(new ObjectId("507f191e810c19729de860ea"))).thenReturn(nikolas);
+        when(personService.findById(new ObjectId("507f191e810c19729de860ea"))).thenReturn(nikolas);
 
-        mockMvc.perform(get("/findPerson/507f191e810c19729de860ea"))
+        mockMvc.perform(get("/findById/507f191e810c19729de860ea"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is("507f191e810c19729de860ea")))
@@ -96,7 +95,7 @@ public class PersonsControllerUnitTests {
                 .andExpect(jsonPath("$.phone", is("+380954789635")));
 
         verify(personService, times(1))
-                .findPersonById(new ObjectId("507f191e810c19729de860ea"));
+                .findById(new ObjectId("507f191e810c19729de860ea"));
         verifyNoMoreInteractions(personService);
     }
 
@@ -105,13 +104,13 @@ public class PersonsControllerUnitTests {
     public void testAddPerson() throws Exception{
         String jsonPerson = String.format("{\"name\": \"Nikolas\",\"phone\": \"+380954789635\"}");
 
-       // when(personService.addPerson(nikolas)).thenReturn(response);
-        mockMvc.perform(post("/add")
+       // when(personService.create(nikolas)).thenReturn(response);
+        mockMvc.perform(post("/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonPerson))
                 .andExpect(status().isOk());
 
-        verify(personService, times(1)).addPerson(any());
+        verify(personService, times(1)).create(any());
 
     }
      @Test
@@ -121,16 +120,17 @@ public class PersonsControllerUnitTests {
          nikolas.setName("Nikolas");
          nikolas.setPhone("+380954789635");
 
-         when(personService.deletePerson(new ObjectId("507f191e810c19729de860ea"))).thenReturn(true);
+         when(personService.deleteById(new ObjectId("507f191e810c19729de860ea"))).thenReturn(true);
 
          this.mockMvc.perform(MockMvcRequestBuilders
-                 .delete("/api/foo/507f191e810c19729de860ea")
+                 .delete("/persons/507f191e810c19729de860ea")
                  .contentType(MediaType.APPLICATION_JSON))
                  .andExpect(status().isOk());
      }
 
 
     @Configuration
+    @ComponentScan
     static class InnerConfiguration {
 
         @Bean

@@ -1,7 +1,6 @@
 package com.example.personProject.services;
 
-import com.example.personProject.controllers.PersonController;
-import com.example.personProject.repository.PersonRepository;
+import com.example.personProject.repositorys.PersonRepository;
 import com.example.personProject.models.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,38 +18,37 @@ public class PersonService {
 
     private static final Logger LOGGER = LogManager.getLogger(PersonService.class);
 
-    public Person findOneByQuery(String name, String phone){
+    public Person findOne(String name, String phone) {
         LOGGER.info("find one person by name and phone");
-        return personRepository.findOneByQuery(name, phone);
+        return personRepository.findOne(name, phone);
     }
 
-    public boolean addPerson(Person p) {
+    public boolean create(Person p) {
         LOGGER.info("Method add person in DB");
-        if(personRepository.findOneByQuery(p.getName(), p.getPhone()) == null){
-
+        if (personRepository.findOne(p.getName(), p.getPhone()) == null) {
             personRepository.save(p);
             LOGGER.info("person is add in DB");
             return true;
         }
         LOGGER.warn("Not add person");
-        return false ;
+        return false;
     }
 
-    public void updatePerson(Person p) {
+    public void update(Person p) {
         LOGGER.info("person update");
         personRepository.save(p);
     }
 
-    public Person findPersonById(ObjectId id) {
-        LOGGER.info("Method findPersonById of DB");
+    public Person findById(ObjectId id) {
+        LOGGER.info("Method findById of DB");
         Person person = personRepository.findById(id);
         if (person == null) {
             LOGGER.warn("Person not found");
         }
-        return  person;
+        return person;
     }
 
-    public boolean deletePerson(ObjectId id) {
+    public boolean deleteById(ObjectId id) {
         Person person = personRepository.findById(id);
         if (person != null) {
             LOGGER.info("person is delete");
@@ -62,7 +60,7 @@ public class PersonService {
         return true;
     }
 
-    public List<Person> showAllPersons() {
+    public List<Person> findAll() {
         LOGGER.info("Show all person from DB");
         return personRepository.findAll();
     }
