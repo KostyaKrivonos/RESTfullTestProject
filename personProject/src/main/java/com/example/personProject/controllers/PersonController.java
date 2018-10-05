@@ -25,10 +25,10 @@ public class PersonController {
 
     private static final Logger LOGGER = LogManager.getLogger(PersonController.class);
 
-   /* @RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public List<Person> findByName(@PathVariable("name") String name) {
-        return personService.;
-    }*/
+    @RequestMapping(value = "/findOne/{name}/{phone}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    public Person findByName(@PathVariable("name") String name, @PathVariable("phone") String phone) {
+        return personService.findOneByQuery(name, phone);
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity addPerson(@Valid @RequestBody Person person, Errors errors) {
@@ -38,16 +38,14 @@ public class PersonController {
         return ResponseEntity.ok(personService.addPerson(person));
     }
 
-    @RequestMapping(value = "/showAllPersons", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/showAll", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public List<Person> showAllPersons() {
-        LOGGER.error("error");
-        LOGGER.info("info");
-        LOGGER.warn("warning");
         return personService.showAllPersons();
     }
 
     @RequestMapping(value = "/findPerson/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public Person findPersonById(@PathVariable("id") ObjectId id) {
+
         return personService.findPersonById(id);
     }
 

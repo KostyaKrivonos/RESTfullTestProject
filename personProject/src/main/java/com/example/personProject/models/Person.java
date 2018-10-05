@@ -22,8 +22,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(ObjectId id, String name, String phone) {
-        this.id = id;
+    public Person( String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
