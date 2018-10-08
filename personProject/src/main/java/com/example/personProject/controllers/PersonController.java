@@ -20,7 +20,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/persons")
-@ComponentScan
 public class PersonController {
     @Autowired
     private PersonService personService;
