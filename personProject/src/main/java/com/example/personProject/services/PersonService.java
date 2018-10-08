@@ -15,7 +15,6 @@ import java.util.List;
 public class PersonService {
     @Autowired
     private PersonRepository personRepository;
-
     private static final Logger LOGGER = LogManager.getLogger(PersonService.class);
 
     public Person findOne(String name, String phone) {

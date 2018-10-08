@@ -1,6 +1,7 @@
 package com.example.personProject.controllers;
 
 import com.example.personProject.models.Person;
+import com.example.personProject.repositorys.PersonRepository;
 import com.example.personProject.services.PersonService;
 import org.bson.types.ObjectId;
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,17 +33,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@SpringBootTest(classes = PersonsControllerUnitTests.Context.class)
 public class PersonsControllerUnitTests {
 
     @Autowired
-    private WebApplicationContext wac;
+    private PersonController controller;
+
     private MockMvc mockMvc;
     @Autowired
     private PersonService personService;
 
     @Before
     public void setup() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     @Test
@@ -130,8 +134,7 @@ public class PersonsControllerUnitTests {
 
 
     @Configuration
-    @ComponentScan
-    static class InnerConfiguration {
+    static class Context {
 
         @Bean
         public PersonController getTestService() {
@@ -142,6 +145,12 @@ public class PersonsControllerUnitTests {
         public PersonService getMockPersonService() {
             PersonService mockPersonService = mock(PersonService.class);
             return mockPersonService;
+        }
+
+        @Bean
+        public PersonRepository getMockPersonRepository(){
+            PersonRepository mockPersonRepository = mock(PersonRepository.class);
+                    return mockPersonRepository;
         }
     }
 }

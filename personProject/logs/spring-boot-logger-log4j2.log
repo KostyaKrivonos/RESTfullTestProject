@@ -1,1 +1,5 @@
-2018-10-05 21:32:51,570 INFO c.e.p.s.PersonService [http-nio-8080-exec-1] Show all person from DB
+2018-10-08 14:34:03,679 WARN o.s.w.s.DispatcherServlet [main] No mapping found for HTTP request with URI [/findOne/name/phone] in DispatcherServlet with name ''
+2018-10-08 14:34:04,273 WARN o.s.w.s.h.AbstractHandlerExceptionResolver [main] Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: (was java.lang.NullPointerException); nested exception is com.fasterxml.jackson.databind.JsonMappingException: (was java.lang.NullPointerException) (through reference chain: java.util.Arrays$ArrayList[0]->com.example.personProject.models.Person["id"])]
+2018-10-08 14:34:04,432 WARN o.s.w.s.DispatcherServlet [main] No mapping found for HTTP request with URI [/findById/507f191e810c19729de860ea] in DispatcherServlet with name ''
+2018-10-08 14:34:04,511 WARN o.s.w.s.DispatcherServlet [main] No mapping found for HTTP request with URI [/persons/507f191e810c19729de860ea] in DispatcherServlet with name ''
+2018-10-08 14:34:04,594 WARN o.s.w.s.DispatcherServlet [main] No mapping found for HTTP request with URI [/create] in DispatcherServlet with name ''
