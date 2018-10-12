@@ -48,4 +48,3 @@ dependencies {
     testCompile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.1.1'
 
 }
-
