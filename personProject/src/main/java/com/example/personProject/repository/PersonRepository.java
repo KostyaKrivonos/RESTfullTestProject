@@ -2,10 +2,7 @@ package com.example.personProject.repository;
 
 import com.example.personProject.model.Person;
 
-import java.util.List;
-
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Component;
@@ -18,4 +15,3 @@ public interface PersonRepository extends MongoRepository<Person, String>{
   Person findOne(String name, String phone);
   
 }
-
