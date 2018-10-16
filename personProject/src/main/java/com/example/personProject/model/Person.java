@@ -3,11 +3,15 @@ package com.example.personProject.model;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
+
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Document(collection = "persons")
+@Data
+@NoArgsConstructor
 public class Person {
     @Id
     private ObjectId id;
@@ -20,7 +24,7 @@ public class Person {
     @Size(min=10, max=13, message = "phone numbers length 10-13")
     private String phone;
 
-    public Person() {
+    /*public Person() {
     }
 
     public Person( String name, String phone) {
@@ -58,5 +62,5 @@ public class Person {
                 "id=" + id +
                 ", name='" + name +
                 ", phone='" + phone;
-    }
+    }*/
 }
