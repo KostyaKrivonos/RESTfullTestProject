@@ -7,13 +7,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -32,7 +32,9 @@ public class PersonServiceTests {
 
     @Test
     public void testFindOneByQuery(){
-        Person nikolas = new Person("Nikolas", "+380974585321");
+    	Person nikolas = new Person();
+        nikolas.setName("Nikolas");
+        nikolas.setPhone("+380974585321");
         when(personRepository.findOne("Nikolas", "+380974585321")).thenReturn(nikolas);
         Person testPerson = personService.findOne("Nikolas", "+380974585321");
         assertEquals(nikolas.getName(), testPerson.getName());
@@ -41,10 +43,14 @@ public class PersonServiceTests {
 
     @Test
     public void testShowAllPersons(){
-        Person nikolas = new Person("Nikolas", "+380974585321");
-        Person alex = new Person("Alex", "+380974878963");
+    	Person nikolas = new Person();
+        nikolas.setName("Nikolas");
+        nikolas.setPhone("+380974585321");
+        Person alex = new Person();
+        alex.setName("Alex");
+        alex.setPhone("+380974878963");
         when(personRepository.findAll()).thenReturn(Arrays.asList(nikolas, alex));
-        List<Person> personList = personService.findAll();
+        Page<Person> personPage = personService.findAll(0);
     }
 
 

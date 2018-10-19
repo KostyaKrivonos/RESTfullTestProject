@@ -31,26 +31,31 @@ configurations {
 }
 dependencies {
     implementation ('org.springframework.boot:spring-boot-starter')
+    
     implementation('org.springframework.boot:spring-boot-starter-web')
     
     implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
-
+    
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-// https://mvnrepository.com/artifact/org.mockito/mockito-core
+    
+    compile('org.springframework.boot:spring-boot-starter-log4j2')
+    
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.21.0'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test
     testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '2.0.5.RELEASE'
     
-    compile('org.springframework.boot:spring-boot-starter-log4j2')
-    // https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo
-    testCompile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.1.1'
+    compile "org.springframework:spring-context:${springVersion}"
     
-	compileOnly 'org.projectlombok:lombok:1.18.2'
-	
-	apt "org.projectlombok:lombok:1.18.2"
-	
+    testCompile "junit:junit:${junitVersion}"
+    
+    compile "org.springframework.data:spring-data-mongodb:${springMongoVersion}"
+    
+    testCompile "de.flapdoodle.embed:de.flapdoodle.embed.mongo:${embedMongoVersion}"
 }
 

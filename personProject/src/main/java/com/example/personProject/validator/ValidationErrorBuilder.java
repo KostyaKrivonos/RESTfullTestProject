@@ -1,8 +1,6 @@
 package com.example.personProject.validator;
 
-import com.example.personProject.controller.PersonController;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
